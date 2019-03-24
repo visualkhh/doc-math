@@ -1,0 +1,83 @@
+원주 (원의길이):25.12
+지름 : 8
+반지름 : 4
+
+25.12 / 8 = 3.14
+3.14 * 8 = 25.12
+
+6.28 / 2 = 3.14
+
+즉 반지름 1일때   원주의반값은 3.14이다. 
+
+
+0~360도는
+디그리 라고부른다.
+
+1라디안은 원주 호의 길이가 반지름과 같은 길이가 될때 정의한다 = 57.2958...도 벌어졌을때 길이.
+1라디안호의 길이가 반지름과 같으므로  파이 라디안이 180도 되는거지.
+3.14 radian  = 180도
+180도 / 3.14 = 57.2958
+
+
+
+라디안은 3.14이다. : 180도이다.
+180 / 3.14 = 57.2958..도
+
+ctx.rotate(3.14 / 2 );  90도이구.
+
+1라디안의 호의 길이가 반지름과 같으므로 파이라디안이 180도
+
+디그리로하자면 Math.PI / 180 
+
+function polygon(context, x, y, radius, sides, startAngle) {
+if (sides < 3) return; //3각형 이하는 그리지 않도록 한다.
+var degree = (Math.PI * 2)/sides; //각 면에 대한 각도를 계산한다.
+context.save(); //드로잉 상태를 저정한다.
+context.translate(x,y); //드로잉 좌표 공간을 다각형 중심좌표로 이동한다.
+context.rotate(startAngle); //시작 각도를 중심으로 그리도록 하기 위하여 회전한다.
+context.moveTo(radius, 0); //다각형의 시작 위치로 이동한다.
+for (var i = 1; i < sides; i++) { //면의 수 만큼 루프를 반복한다
+//다음 꼭지점까지 선을 그린다.
+context.lineTo( radius * Math.cos(degree * i), radius * Math.sin(degree * i) );
+}
+context.closePath(); //패스를 닫는다.
+context.restore(); //기존 드로잉 상태를 복구한다.
+}
+실습 – Canvas_Study10-03_Polygon.html
+ polygon(context, 125, 125, 100, 3, -Math.PI/2); //삼각형을 그린다
+ polygon(context, 350, 125, 100, 5, -Math.PI/2); //오각형을 그린다
+ polygon(context, 550, 125, 100, 6, -Math.PI/2); //육각형을 그린다
+ polygon(context, 750, 125, 100, 7, -Math.PI/2); //칠각형을 그린다
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="400" height="400" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.translate(200, 200);
+ctx.rotate(3.14 / 2 );
+ctx.fillRect(-40, -20, 80, 40);
+</script>
+
+<p><strong>Note:</strong> The canvas tag is not supported in Internet 
+Explorer 8 and earlier versions.</p>
+
+</body>
+</html>
+
+https://darkpgmr.tistory.com/26
+
+https://m.blog.naver.com/PostView.nhn?blogId=wyepark&logNo=220517029219&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+
+http://html5tech.info/html5/pdf/HTML5&CSS3_10%EC%9E%A5_v1.0.pdf
+
+https://www.youtube.com/watch?v=gNCC14O6v5g
+
+https://www.w3schools.com/tags/canvas_rotate.asp
